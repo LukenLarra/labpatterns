@@ -2,11 +2,8 @@ package domain;
 
 import factory.SymptomFactory;
 import iterator.Covid19PacientIterator;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -43,8 +40,20 @@ public class Covid19Pacient {
         return symptoms.get(s);
     }
 
-    public List<Symptom> getSymptoms() {
-        return new ArrayList<>(symptoms.keySet());
+    public Set<Symptom> getSymptoms() {
+        return symptoms.keySet();
+    }
+
+    public Symptom getSymptomByName(String symptomName) {
+        Iterator<Symptom> i = getSymptoms().iterator();
+        Symptom s = null;
+        while (i.hasNext()) {
+            s = i.next();
+            if (s != null && s.getName().equals(symptomName)) {
+                return s;
+            }
+        }
+        return null;
     }
 
     public void addSymptom(Symptom c, Integer w) {
@@ -52,7 +61,7 @@ public class Covid19Pacient {
     }
 
     public Symptom addSymptomByName(String symptom, Integer w) {
-        Symptom s = symptomFactory.getSymptomByName(getSymptoms(), symptom);
+        Symptom s = getSymptomByName(symptom);
         if (s == null) {
             s = symptomFactory.createSymptom(symptom);
             symptoms.put(s, w);
@@ -61,7 +70,7 @@ public class Covid19Pacient {
     }
 
     public Symptom removeSymptomByName(String symptomName) {
-        Symptom s = symptomFactory.getSymptomByName(getSymptoms(), symptomName);
+        Symptom s = getSymptomByName(symptomName);
         System.out.println("Simptom to remove: " + s);
         if (s != null) {
             symptoms.remove(s);
@@ -95,6 +104,5 @@ public class Covid19Pacient {
         impact = afection + increment;
         return impact;
     }
-
 
 }

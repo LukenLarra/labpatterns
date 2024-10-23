@@ -25,7 +25,6 @@ public class  MedicalGUI extends JFrame {
 	private JLabel reportLabel;
 	private Medicament m;
 	private JLabel medicamentLabel;
-	private SymptomFactory symptomFactory;
 
 	
 	/**
@@ -99,7 +98,7 @@ public class  MedicalGUI extends JFrame {
 	public void addSymptom(Medicament m, String symptomName) {
 		Symptom s;
 		
-		  if (symptomFactory.getSymptomByName(m.getSymptoms(), symptomName)==null) {
+		  if (m.getSymptomByName(symptomName)==null) {
 				s=m.addSymptomByName(symptomName);
 				if (s!=null) {
 					errorLabel.setText("<html>Symptom added: <b>"+symptomName+"</b></html>");
@@ -111,8 +110,8 @@ public class  MedicalGUI extends JFrame {
 	}
 	
 	public void removeSymptom(String symptomName) {
-		if (symptomFactory.getSymptomByName(m.getSymptoms(), symptomName)!=null) {
-			symptomFactory.removeSymptomByName(m.getSymptoms(), symptomName);
+		if (m.getSymptomByName(symptomName)!=null) {
+			m.removeSymptomByName(symptomName);
 			errorLabel.setText("<html>Symptom removed: <b>"+symptomName+"</b></html>");
 			reportLabel.setText(createReport());
 
@@ -121,7 +120,7 @@ public class  MedicalGUI extends JFrame {
 	}
 	
 	public String createReport() {
-		Iterator<Symptom> i=m.getSymptoms().iterator();
+		Iterator<Symptom> i=m.getSymptoms();
 	    Symptom p2;
 	    String s="<html>Symptoms treated by: <b>"+m.getName()+"</b><br>";
 	    while (i.hasNext()) {

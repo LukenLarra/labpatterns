@@ -30,7 +30,6 @@ public class PacientSymptomGUI extends JFrame {
 	private JLabel labelPacient;
 	private JTextField symptonNameField;
 	private JLabel reportLabel;
-	private SymptomFactory symptomFactory;
 
 	
 	/**
@@ -113,7 +112,7 @@ public class PacientSymptomGUI extends JFrame {
 	public void addSymptom(Covid19Pacient p, String symptomName) {
 		Symptom s;
 		if (isNumeric(weightField.getText())) {
-		  if (symptomFactory.getSymptomByName(p.getSymptoms(), symptomName)==null) {
+		  if (p.getSymptomByName(symptomName)==null) {
 			if (Integer.parseInt(weightField.getText())<=3) {
 				s=p.addSymptomByName(symptomName, Integer.parseInt(weightField.getText()));
 				if (s!=null) {
@@ -128,7 +127,7 @@ public class PacientSymptomGUI extends JFrame {
 	}
 	
 	public void removeSymptom(String symptomName) {
-		if (symptomFactory.getSymptomByName(p.getSymptoms(), symptomName)!=null) {
+		if (p.getSymptomByName(symptomName)!=null) {
 			p.removeSymptomByName(symptomName);
 			errorLabel.setText("Symptom removed :"+symptomName);
 			reportLabel.setText(createReport());
