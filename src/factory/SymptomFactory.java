@@ -4,7 +4,10 @@ import domain.DigestiveSymptom;
 import domain.NeuroMuscularSymptom;
 import domain.RespiratorySymptom;
 import domain.Symptom;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class SymptomFactory {
@@ -48,6 +51,28 @@ public class SymptomFactory {
 	    }
 	    return null;		
 	}
+
+
+	public List<Symptom> removeSymptomByName(List<Symptom> symptoms, String symptomName) {
+		Symptom s = getSymptomByName(symptoms, symptomName);
+        System.out.println("Simptom to remove: " + s);
+        if (s != null) {
+            symptoms.remove(s);
+        }
+        return symptoms;
+	}
+
+	public Symptom getSymptomByName(List<Symptom> symptoms, String symptomName) {
+        Iterator<Symptom> i = symptoms.iterator();
+        Symptom s = null;
+        while (i.hasNext()) {
+            s = i.next();
+            if (s != null && s.getName().equals(symptomName)) {
+                return s;
+            }
+        }
+        return null;
+    }
 
 	
 }

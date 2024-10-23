@@ -26,7 +26,7 @@ public class Medicament {
     }
 
     public Symptom addSymptomByName(String symptom) {
-        Symptom s = getSymptomByName(symptom);
+        Symptom s = symptomFactory.getSymptomByName(getSymptoms(), symptom);
         if (s == null) {
             s = symptomFactory.createSymptom(symptom); // Usar SymptomFactory para crear el síntoma
             if (s != null) { // Verificar que el síntoma no sea null
@@ -36,33 +36,8 @@ public class Medicament {
         return s;
     }
 
-    public void removeSymptom(Symptom s) {
-        symptoms.remove(s);
-
-    }
-
-    public Iterator<Symptom> getSymptoms() {
-        return symptoms.iterator();
-    }
-
-    public Symptom getSymptomByName(String symptomName) {
-        Iterator<Symptom> i = symptoms.iterator();
-        Symptom s = null;
-        while (i.hasNext()) {
-            s = i.next();
-            if (s != null && s.getName().compareTo(symptomName) == 0) {
-                return s;
-            }
-        }
-        return null;
-    }
-
-    public Symptom removeSymptomByName(String symptomName) {
-        Symptom s = getSymptomByName(symptomName);
-        if (s != null) {
-            removeSymptom(s);
-        }
-        return s;
+    public List<Symptom> getSymptoms() {
+        return symptoms;
     }
 
 }
