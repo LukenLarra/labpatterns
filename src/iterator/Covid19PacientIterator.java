@@ -1,5 +1,6 @@
 package iterator;
 
+import adapter.InvertedIterator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -7,7 +8,7 @@ import java.util.Vector;
 
 import domain.Symptom;
 
-public class Covid19PacientIterator implements Iterator{
+public class Covid19PacientIterator implements Iterator, InvertedIterator{
 	List<Symptom> symptoms=new Vector<Symptom>();
 	int position=0;
 
@@ -15,6 +16,7 @@ public class Covid19PacientIterator implements Iterator{
 		Iterator<Symptom> i=s.iterator();
 		while (i.hasNext())
 			symptoms.add(i.next());
+		
 	}
 
 	@Override
@@ -27,6 +29,23 @@ public class Covid19PacientIterator implements Iterator{
 		Symptom symptom=symptoms.get(position);
 		position++;
 		return symptom;
+	}
+
+	@Override
+	public Object previous() {
+		position--;
+		Symptom symptom=symptoms.get(position);
+		return symptom;
+	}
+
+	@Override
+	public boolean hasPrevious() {
+		return position>0;
+	}
+
+	@Override
+	public void goLast() {
+		position=symptoms.size()-1;
 	}
 
 }
