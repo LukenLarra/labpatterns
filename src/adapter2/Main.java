@@ -12,7 +12,7 @@ public class Main {
 
 		Covid19Pacient pacient2=new Covid19Pacient("paco", 20);
 		pacient2.addSymptomByName("fiebre", 2);
-		pacient2.addSymptomByName("vomitos", 1);
+		pacient2.addSymptomByName("vómitos", 1);
 		pacient2.addSymptomByName("nauseas", 3);
 		
 		ShowPacientTableGUI gui=new ShowPacientTableGUI(pacient1);
