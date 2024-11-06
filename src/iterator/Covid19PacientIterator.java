@@ -3,6 +3,7 @@ package iterator;
 import adapter.InvertedIterator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.Vector;
 
@@ -26,21 +27,23 @@ public class Covid19PacientIterator implements Iterator, InvertedIterator{
 
 	@Override
 	public Object next() {
-		Symptom symptom=symptoms.get(position);
-		position++;
-		return symptom;
+		if (!hasNext()) {
+            throw new NoSuchElementException("No more elements to iterate.");
+        }
+		return symptoms.get(position++);
 	}
 
 	@Override
 	public Object previous() {
-		position--;
-		Symptom symptom=symptoms.get(position);
-		return symptom;
+		if (!hasPrevious()) {
+            throw new NoSuchElementException("No previous elements.");
+        }
+		return symptoms.get(position--);
 	}
 
 	@Override
 	public boolean hasPrevious() {
-		return position>0;
+		return position>=0;
 	}
 
 	@Override
