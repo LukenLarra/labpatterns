@@ -10,7 +10,7 @@ public class Main {
 		pacient1.addSymptomByName("cefalea", 1);
 		pacient1.addSymptomByName("astenia", 3);
 
-		Covid19Pacient pacient2=new Covid19Pacient("paco", 20);
+		Covid19Pacient pacient2=new Covid19Pacient("jon", 20);
 		pacient2.addSymptomByName("fiebre", 2);
 		pacient2.addSymptomByName("vómitos", 1);
 		pacient2.addSymptomByName("nauseas", 3);
